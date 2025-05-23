@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add a New Thought</title>
+  <style>
+    body {
+      background: lightblue;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ff6f61;
+      text-shadow: 1px 1px 3px gray;
+    }
+
+    form.search-form {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form.search-form textarea {
+      resize: vertical;
+      min-height: 150px;
+      padding: 15px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: none;
+      background-color: #222;
+      color: #f0f0f0;
+      box-shadow: inset 0 0 8px #333;
+      transition: background-color 0.3s ease;
+    }
+
+    form.search-form textarea:focus {
+      background-color: #2a2a2a;
+      outline: none;
+      box-shadow: 0 0 10px #ff6f61;
+    }
+
+    form.search-form input[type="text"] {
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      background-color: #222;
+      color: #f0f0f0;
+      box-shadow: inset 0 0 8px #333;
+      transition: background-color 0.3s ease;
+    }
+
+    form.search-form input[type="text"]:focus {
+      background-color: #2a2a2a;
+      outline: none;
+      box-shadow: 0 0 10px #ff6f61;
+    }
+
+    form.search-form button {
+      padding: 14px 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      background: #ff6f61;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 111, 97, 0.6);
+      transition: background 0.3s ease;
+    }
+
+    form.search-form button:hover {
+      background: #e85c4f;
+    }
+
+    a {
+      margin-top: 25px;
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      align-self: flex-start;
+    }
+
+    a:hover {
+      color: #e85c4f;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add a New Thought</h1>
+  <form action="/thoughts" method="POST" class="search-form">
+    <textarea name="content" placeholder="Write your thought here..." required></textarea>
+    <input type="text" name="category" placeholder="Category" required />
+    <button type="submit">Add Thought</button>
+  </form>
+  <a href="/">Back to List</a>
+</body>
+</html>

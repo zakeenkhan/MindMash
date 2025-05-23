@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MindMash</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>🧠 MindMash</h1>
+
+  <!-- Search Bar -->
+  <form method="GET" action="/" class="search-form">
+    <input 
+      type="text" 
+      name="q" 
+      placeholder="Search thoughts..." 
+      value="<%= query || '' %>" 
+      aria-label="Search thoughts"
+      autocomplete="on"
+    />
+    <button type="submit" aria-label="Search">🔍</button>
+  </form>
+
+  <!-- Category Filters -->
+  <nav class="filters" aria-label="Category Filters">
+    <a href="/" class="<%= !category ? 'active' : '' %>">All</a>
+    <a href="/?category=idea" class="<%= category === 'idea' ? 'active' : '' %>">💡 Ideas</a>
+    <a href="/?category=Thoughts" class="<%= category === 'Thoughts' ? 'active' : '' %>">💭 Thoughts</a>
+    <a href="/?category=Worries" class="<%= category === 'Worries' ? 'active' : '' %>">😟 Worries</a>
+    <a href="/?category=dream" class="<%= category === 'dream' ? 'active' : '' %>">🌈 Dreams</a>
+  </nav>
+
+  <a class="add-button" href="/thoughts/new">+ Add Thought</a>
+
+  <ul class="thought-list">
+    <% if (thoughts.length === 0) { %>
+      <li class="empty-message">No thoughts found.</li>
+    <% } %>
+    <% thoughts.forEach(thought => { 
+      const emoji = {
+        idea: "💡",
+        dream: "🌈",
+        worry: "😟",
+        thought: "💭"
+      }[thought.category?.toLowerCase()] || "📝";
+    %>
+      <li class="thought-item">
+        <span class="emoji" aria-hidden="true"><%= emoji %></span>
+        <span class="content"><%= thought.content %></span>
+        <span class="category-badge"><%= thought.category %></span>
+        <small class="date" aria-label="Created at">
+          🕒 <%= new Date(thought.created_at).toLocaleDateString() %>
+        </small>
+        <div class="actions">
+          <a href="/thoughts/<%= thought.id %>/edit" aria-label="Edit thought">✏️ Edit</a>
+          <form method="POST" action="/thoughts/<%= thought.id %>?_method=DELETE" onsubmit="return confirm('Delete this thought?');">
+            <button type="submit" aria-label="Delete thought">🗑 Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
